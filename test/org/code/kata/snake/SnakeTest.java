@@ -92,19 +92,13 @@ public class SnakeTest {
 	}
 	
 	@Test
-	public void theHeadIsAtSpecifiedCoordinates() throws Exception {
-		Coordinates coordinates = new Coordinates(0,0);
-		Snake snake = new Snake();
-		snake.setHeadCoordinates(coordinates);
-		
-	}
-	
-	@Test
 	public void itChangesCoordinatesWhenItMoves() throws Exception {
 		Snake snake = new Snake();
+		snake.headDown();
 		snake.move();
-		assertEquals(-1, snake.getHeadCoordinates().x);
-		assertEquals(0, snake.getHeadCoordinates().y);
+		Coordinates headCoordinates = snake.getHeadCoordinates();
+		assertEquals(0, headCoordinates.x);
+		assertEquals(1, headCoordinates.y);
 	}
 	
 	@Test

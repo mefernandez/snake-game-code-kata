@@ -16,8 +16,7 @@ canvas you find easier to draw in your programming language of choice.
 Walkthrough
 -----------
 
-The obvious approach is to think of the snake object, what properties does it have, and
-how does it behave.
+The obvious approach is to think of the snake object, its *properties* and its *behaviour*.
 
 Properties seem to be easier to code into tests, for instance:
 
@@ -39,7 +38,22 @@ to start with something simple, list this:
 		assertEquals("U", direction);
 	}
 	
+Moving the snake led me to include coordinates in the snake object.
 
+```java
+	@Test
+	public void itChangesCoordinatesWhenItMoves() throws Exception {
+		Snake snake = new Snake();
+		snake.headDown();
+		snake.move();
+		Coordinates headCoordinates = snake.getHeadCoordinates();
+		assertEquals(0, headCoordinates.x);
+		assertEquals(1, headCoordinates.y);
+	}
+```
+
+This test also starts showing some choices on where's the origin of the coordinates.
+ 
 
 Some personal background
 ------------------------
