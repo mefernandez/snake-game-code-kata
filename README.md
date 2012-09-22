@@ -29,7 +29,7 @@ public void aSnakeIs4UnitsLongByDefault() {
 ```
 
 The behaviour of a snake is mostly about how it moves or where it's going to. I preferred
-to start with something simple, list this:
+to start with something simple, like this:
 ```java
 @Test
 public void canHeadUp() {
@@ -107,6 +107,73 @@ Then I tell the snake to head up and move in that direction. So the string shoul
 U
 DRR
 ```
+
+At this point I just needed to visualize the snake. So I started to think of a Yard
+holding the Snake and how to render it. I chose to render the Yard and the Snake as
+Strings. This made it easy to test the renderization.
+
+```java
+@Test
+public void aYardIs10x10ByDefault() throws Exception {
+	Yard yard = new Yard();
+	assertEquals(10, yard.getWidth());
+	assertEquals(10, yard.getHeight());
+}
+
+
+
+@Test
+public void renderAnEmptyDefaultYard() {
+	Yard yard = new Yard();
+	String emptyYard = 	"************" + "\n" + 
+						"*          *" + "\n" +
+						"*          *" + "\n" +
+						"*          *" + "\n" +
+						"*          *" + "\n" +
+						"*          *" + "\n" +
+						"*          *" + "\n" +
+						"*          *" + "\n" +
+						"*          *" + "\n" +
+						"*          *" + "\n" +
+						"*          *" + "\n" +
+						"************" + "\n";
+	String rendering = yard.render();
+	assertEquals(emptyYard, rendering);
+}
+```
+
+An empty yard was easy, but composing the renderization of the and with a snake in it was
+a bit more difficult. The composition of the yard and the snake was too difficult to be done
+on a String basis. At last, a matrix came along.
+
+```java
+/**
+ * 
+ * @param matrix, in (row, col) zero-based index fashion.
+ * e.g. In the following matrix of size 2x3 (2 rows, 3 cols)
+ * the number 1 is at (1,2):
+ * 0 0 0
+ * 0 0 1
+ * Thus, the (0,0) coordinates is at top-left.
+ */
+public void placeIn2DMatrix(char[][] matrix) {
+...
+}
+```
+ 
+So the Yard builds a matrix of its size and passes it to the snake. The snake takes this matrix
+and places its body on it, starting at the head and moving along according to the UDLR state.
+
+Pending challenges
+------------------
+
+To this date, these are the pending challenges:
+
+- Actually make the game come to life. I mean, make the game tick, get keyboard input and
+  watch the snake move around in the screen.
+- Program the logic of the snake running into itself. 
+- Make the integration with the Android SDK Snake project sample. 
+
 
 
 Some personal background
