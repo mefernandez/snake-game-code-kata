@@ -142,7 +142,7 @@ public void renderAnEmptyDefaultYard() {
 }
 ```
 
-An empty yard was easy, but composing the renderization of the and with a snake in it was
+An empty yard was easy, but composing the renderization of the yard with a snake in it was
 a bit more difficult. The composition of the yard and the snake was too difficult to be done
 on a String basis. At last, a matrix came along.
 
