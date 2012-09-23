@@ -191,7 +191,7 @@ case that popped the issue.
 public void move() throws SnakeHitYardWallException {
 	// A bunch of code to move the snake
 	// ...
-	// And finally, tell the observer that these are the new head coodinates
+	// And finally, tell the observer that these are the new head coordinates
 	this.snakeMotionObserver.updateSnakePosition(this.headCoordinates);
 }
 ```
