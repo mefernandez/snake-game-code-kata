@@ -181,7 +181,7 @@ public void theSnakeHitsLeftYardWall() throws SnakeHitYardWallException {
 ```
 
 I decided I wanted the snake to throw an Exception when calling the move() method if it hit a wall.
-However, the information on the wall are not in the Snake object, it's in the Yard object.
+However, the information on the walls is not in the Snake object, it's in the Yard object.
 This test confirmed something I suspected: that I needed to notify someone when the snake
 moves and changes its position or its state. I thought this notification would be necessary
 to refresh the rendering of the view. And maybe it will be. But here it is, this is the test
