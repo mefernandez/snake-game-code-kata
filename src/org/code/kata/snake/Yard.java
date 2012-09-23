@@ -31,6 +31,7 @@ public class Yard {
 		snake.headCoordinates.x = coordinates.x;
 		snake.headCoordinates.y = coordinates.y;
 		this.snake = snake;
+		this.snake.setSnakeMotionObserver(this.new YardSnakeMotionObserver());
 	}
 
 	public String render() {
@@ -79,6 +80,19 @@ public class Yard {
 				sb.append(c);
 			}
 			sb.append('\n');
+		}
+	}
+	
+	public class YardSnakeMotionObserver implements SnakeMotionObserver {
+
+		@Override
+		public void updateSnakePosition(Coordinates headCoordinates) throws SnakeHitYardWallException {
+			if (headCoordinates.x < 0 || headCoordinates.y < 0)
+				throw new SnakeHitYardWallException();
+			if (headCoordinates.x >= Yard.this.width)
+				throw new SnakeHitYardWallException();
+			if (headCoordinates.y >= Yard.this.height)
+				throw new SnakeHitYardWallException();
 		}
 	}
 }

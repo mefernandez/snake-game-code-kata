@@ -56,7 +56,7 @@ public class YardTest {
 	}
 
 	@Test
-	public void renderAMovingSnake() {
+	public void renderAMovingSnake() throws SnakeHitYardWallException {
 		Yard yard = new Yard();
 		Snake snake = new Snake();
 		yard.put(snake, new Coordinates(0,0));
@@ -80,7 +80,7 @@ public class YardTest {
 	}
 	
 	@Test
-	public void renderSnakeMovingInCirclesCounterClockWise() {
+	public void renderSnakeMovingInCirclesCounterClockWise() throws SnakeHitYardWallException {
 		Yard yard = new Yard(4,4);
 		Snake snake = new Snake();
 		yard.put(snake, new Coordinates(0,0));
@@ -222,4 +222,49 @@ public class YardTest {
 	
 	
 	}
+	
+	@Test(expected=SnakeHitYardWallException.class)
+	public void theSnakeHitsLeftYardWall() throws SnakeHitYardWallException {
+		Yard yard = new Yard(4,1);
+		Snake snake = new Snake();
+		snake.state = "LRRR";
+		yard.put(snake, new Coordinates(0,0));
+		// The snake fits exactly, if it moves it should hit a wall
+		// and throw an Exception
+		snake.move();
+	}
+
+	@Test(expected=SnakeHitYardWallException.class)
+	public void theSnakeHitsRightYardWall() throws SnakeHitYardWallException {
+		Yard yard = new Yard(4,1);
+		Snake snake = new Snake();
+		snake.state = "RLLL";
+		yard.put(snake, new Coordinates(3,0));
+		// The snake fits exactly, if it moves it should hit a wall
+		// and throw an Exception
+		snake.move();
+	}
+
+	@Test(expected=SnakeHitYardWallException.class)
+	public void theSnakeHitsUpperYardWall() throws SnakeHitYardWallException {
+		Yard yard = new Yard(4,1);
+		Snake snake = new Snake();
+		snake.state = "ULLL";
+		yard.put(snake, new Coordinates(0,0));
+		// The snake fits exactly, if it moves it should hit a wall
+		// and throw an Exception
+		snake.move();
+	}
+
+	@Test(expected=SnakeHitYardWallException.class)
+	public void theSnakeHitsLowerYardWall() throws SnakeHitYardWallException {
+		Yard yard = new Yard(4,1);
+		Snake snake = new Snake();
+		snake.state = "DLLL";
+		yard.put(snake, new Coordinates(0,0));
+		// The snake fits exactly, if it moves it should hit a wall
+		// and throw an Exception
+		snake.move();
+	}
 }
+

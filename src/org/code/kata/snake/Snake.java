@@ -13,6 +13,24 @@ public class Snake {
 	 * [L,R,R,R], which is also visually correct.
 	 */
 	Coordinates headCoordinates = new Coordinates(0,0);
+	SnakeMotionObserver snakeMotionObserver = new SnakeMotionObserver() {
+		
+		@Override
+		public void updateSnakePosition(Coordinates headCoordinates)
+				throws SnakeHitYardWallException {
+			// NullObjectPattern, don't track the snake's position
+			
+		}
+	};
+	
+
+	public SnakeMotionObserver getSnakeMotionObserver() {
+		return snakeMotionObserver;
+	}
+
+	public void setSnakeMotionObserver(SnakeMotionObserver snakeMotionObserver) {
+		this.snakeMotionObserver = snakeMotionObserver;
+	}
 
 	public int getLength() {
 		return this.state.length();
@@ -42,7 +60,7 @@ public class Snake {
 		this.state = "R" + this.state.substring(1);
 	}
 
-	public void move() {
+	public void move() throws SnakeHitYardWallException {
 		String tail = this.state.substring(1, this.state.length()-1);
 		String head = this.getCurrentDirection();
 		String neck = "D";
@@ -60,7 +78,7 @@ public class Snake {
 			this.headCoordinates.x--;
 		}
 		this.state = head + neck + tail;
-
+		this.snakeMotionObserver.updateSnakePosition(this.headCoordinates);
 	}
 
 	public void setHeadCoordinates(Coordinates coordinates) {

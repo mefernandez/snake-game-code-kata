@@ -43,14 +43,14 @@ public class SnakeTest {
 		assertEquals("LRRR", snake.state);
 	}
 	@Test
-	public void canMoveUp() {
+	public void canMoveUp() throws SnakeHitYardWallException {
 		Snake snake = new Snake();
 		snake.headUp();
 		snake.move();
 		assertEquals("UDRR", snake.state);
 	}
 	@Test
-	public void canMoveDown() {
+	public void canMoveDown() throws SnakeHitYardWallException {
 		Snake snake = new Snake();
 		snake.headDown();
 		snake.move();
@@ -58,7 +58,7 @@ public class SnakeTest {
 	}
 	
 	@Test
-	public void canMoveRight() {
+	public void canMoveRight() throws SnakeHitYardWallException {
 		Snake snake = new Snake();
 		snake.state = "ULLL";
 		snake.headRight();
@@ -130,4 +130,5 @@ public class SnakeTest {
 		char[][] expected = new char[][] {{'U',0,0},{'D','R',0},{0,'D',0}};
 		assertArrayEquals(expected, matrix);
 	}
+	
 }

@@ -164,6 +164,58 @@ public void placeIn2DMatrix(char[][] matrix) {
 So the Yard builds a matrix of its size and passes it to the snake. The snake takes this matrix
 and places its body on it, starting at the head and moving along according to the UDLR state.
 
+Something interesting happened when specifying the case when the snake hits a wall. Look at
+this test:
+
+```java
+@Test(expected=SnakeHitYardWallException.class)
+public void theSnakeHitsLeftYardWall() throws SnakeHitYardWallException {
+	Yard yard = new Yard(4,1);
+	Snake snake = new Snake();
+	snake.state = "LRRR";
+	yard.put(snake, new Coordinates(0,0));
+	// The snake fits exactly, if it moves it should hit a wall
+	// and throw an Exception
+	snake.move();
+}
+```
+
+I decided I wanted the snake to throw an Exception when calling the move() method if it hit a wall.
+However, the information on the wall are not in the Snake object, it's in the Yard object.
+This test confirmed something I suspected: that I needed to notify someone when the snake
+moves and changes its position or its state. I thought this notification would be necessary
+to refresh the rendering of the view. And maybe it will be. But here it is, this is the test
+case that popped the issue.
+
+```java
+public void move() throws SnakeHitYardWallException {
+	// A bunch of code to move the snake
+	// ...
+	// And finally, tell the observer that these are the new head coodinates
+	this.snakeMotionObserver.updateSnakePosition(this.headCoordinates);
+}
+```
+
+I simply coded an "observer" to be notified. The observer object is set by the Yard object, which
+holds the dimensions (width and height). The observer is implemented as an inner class to
+access the yard's width and height.
+
+```java
+public class YardSnakeMotionObserver implements SnakeMotionObserver {
+
+	@Override
+	public void updateSnakePosition(Coordinates headCoordinates) throws SnakeHitYardWallException {
+		if (headCoordinates.x < 0 || headCoordinates.y < 0)
+			throw new SnakeHitYardWallException();
+		if (headCoordinates.x >= Yard.this.width)
+			throw new SnakeHitYardWallException();
+		if (headCoordinates.y >= Yard.this.height)
+			throw new SnakeHitYardWallException();
+	}
+}
+```
+
+
 Pending challenges
 ------------------
 
