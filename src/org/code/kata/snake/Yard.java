@@ -1,6 +1,5 @@
 package org.code.kata.snake;
 
-import java.util.Arrays;
 
 public class Yard {
 
@@ -94,5 +93,9 @@ public class Yard {
 			if (headCoordinates.y >= Yard.this.height)
 				throw new SnakeHitYardWallException();
 		}
+	}
+
+	public Snake getSnake() {
+		return this.snake;
 	}
 }

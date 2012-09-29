@@ -131,4 +131,13 @@ public class SnakeTest {
 		assertArrayEquals(expected, matrix);
 	}
 	
+	@Test
+	public void delegateSnakeRenderingToExternalObject() {
+		Snake snake = new Snake();
+		snake.state = "UDRU";
+		MockSnakeRenderer renderer = new MockSnakeRenderer();
+		snake.render(renderer);
+		assertEquals("U(0,0)(0,1)(1,1)(1,0)", renderer.sb.toString());
+	}
+	
 }

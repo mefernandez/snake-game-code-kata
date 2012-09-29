@@ -99,6 +99,7 @@ public class Snake {
 	 * Thus, the (0,0) coordinates is at top-left.
 	 */
 	public void placeIn2DMatrix(char[][] matrix) {
+		// FIXME Duplicate with render(SnakeRenderer). Unify.
 		int hx = this.headCoordinates.x;
 		int hy = this.headCoordinates.y;
 		matrix[hy][hx] = this.state.charAt(0);
@@ -124,6 +125,34 @@ public class Snake {
 				matrix[y][x] = c;
 		}
 		
+	}
+
+	public void render(SnakeRenderer renderer) {
+		int hx = this.headCoordinates.x;
+		int hy = this.headCoordinates.y;
+		char direction = this.state.charAt(0);
+		renderer.renderHead(this.headCoordinates, direction);
+		int x = hx;
+		int y = hy;
+		for (int i=1; i<this.state.length(); i++) {
+			char c = this.state.charAt(i);
+			switch (c) {
+			case 'U':
+				y--;
+				break;
+			case 'D':
+				y++;
+				break;
+			case 'R':
+				x++;
+				break;
+			case 'L':
+				x--; 
+				break;
+			}
+			Coordinates coordinates = new Coordinates(x, y);
+			renderer.renderBody(coordinates);
+		}		
 	}
 
 	

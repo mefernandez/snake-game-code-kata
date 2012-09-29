@@ -215,6 +215,12 @@ public class YardSnakeMotionObserver implements SnakeMotionObserver {
 }
 ```
 
+Android integration notice
+--------------------------
+
+I managed to integrate this code into the Android game. 
+Please see https://github.com/mefernandez/android-snake-example 
+
 
 Pending challenges
 ------------------
@@ -222,10 +228,8 @@ Pending challenges
 To this date, these are the pending challenges:
 
 - Actually make the game come to life. I mean, make the game tick, get keyboard input and
-  watch the snake move around in the screen.
-- Program the logic of the snake running into itself. 
-- Make the integration with the Android SDK Snake project sample. 
-
+  watch the snake move around in the screen. Quit trying to make it work on console mode. It's madness.
+- Program the logic of the snake running into itself and growing in size. 
 
 
 Some personal background
