@@ -7,6 +7,9 @@ public class Snake {
 	 * and the 3 remaining parts of the body are placed to its Right.
 	 */
 	String state = "LRRR";
+
+	boolean grow = false;
+
 	/*
 	 * The default coordinates (0,0) makes the initial state
 	 * a valid one to be represented in a 1x4 matrix.
@@ -61,7 +64,13 @@ public class Snake {
 	}
 
 	public void move() throws SnakeHitYardWallException {
-		String tail = this.state.substring(1, this.state.length()-1);
+		String tail;
+		if (!grow)
+			tail = this.state.substring(1, this.state.length()-1);
+		else {
+			tail = this.state.substring(1, this.state.length());
+			grow = false;
+		}
 		String head = this.getCurrentDirection();
 		String neck = "D";
 		if ("D".equals(head)) {
@@ -153,6 +162,10 @@ public class Snake {
 			Coordinates coordinates = new Coordinates(x, y);
 			renderer.renderBody(coordinates);
 		}		
+	}
+
+	public void eat() {
+		this.grow = true;
 	}
 
 	

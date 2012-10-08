@@ -139,5 +139,21 @@ public class SnakeTest {
 		snake.render(renderer);
 		assertEquals("U(0,0)(0,1)(1,1)(1,0)", renderer.sb.toString());
 	}
+
+	@Test
+	public void grows1UnitWhenItEatsAndThenMoves() throws SnakeHitYardWallException {
+		Snake snake = new Snake();
+		snake.state = "RLLL";
+		snake.setHeadCoordinates(new Coordinates(3,0));
+		snake.eat();
+		assertEquals(4, snake.getLength());
+		snake.move();
+		assertEquals(5, snake.getLength());
+		assertEquals("RLLLL", snake.state);
+		assertEquals(4, snake.getHeadCoordinates().x);
+		snake.move();
+		assertEquals(5, snake.getLength());
+		assertEquals(5, snake.getHeadCoordinates().x);
+	}
 	
 }
