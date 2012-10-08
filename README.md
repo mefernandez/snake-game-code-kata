@@ -255,5 +255,7 @@ https://github.com/mefernandez/android-snake-example
 I modified it to accept touch screens instead of UDLR keys to change the snake's direction.
 Looking at the code I wondered if I could detach the game logic from the Android stuff.
 So I engaged in developing the game TDD style independently from the presentation and platform
-technologies. The next challenge is to integrate this with the Android project and make it
-work.
+technologies.
+
+You can also see an integration of this code base into the Android project: 
+https://github.com/mefernandez/android-snake-example
